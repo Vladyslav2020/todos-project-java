@@ -1,6 +1,5 @@
 package com.example.springsecurityapp.controller;
 
-import com.example.springsecurityapp.jwt.JwtAuthenticationRequest;
 import com.example.springsecurityapp.model.LoginResponse;
 import com.example.springsecurityapp.model.MessageResponse;
 import com.example.springsecurityapp.model.User;
@@ -9,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,7 +23,7 @@ public class AuthController {
     private UserService userService;
 
     @PostMapping("/register")
-    public MessageResponse register(@RequestBody User user){
+    public MessageResponse register(@RequestBody User user) {
         userService.add(user);
         MessageResponse messageResponse = new MessageResponse("User created");
         return messageResponse;
